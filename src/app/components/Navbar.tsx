@@ -1,35 +1,38 @@
-'use client';
-import Link from "next/link";
-import {usePathname} from 'next/navigation';
-export default function Navbar(){
-    const pathname = usePathname();
-    return(
-<div className="  bg-gray-100 flex-wrap ">
-<div className="text-black flex flex-wrap flex-col md:flex-row font-bold text-2xl md:text-3xl justify-between text-center items-center bg-white px-4 py-2  border-b border-gray-500">ShoeStore
-<div className="flex flex-wrap justify-center gap-3 font-medium md:text-xl text-sm  text-black">
-    <Link href='/' className="hover:underline hover:font-bold">Home</Link>
-    <Link href='/cart' className="hover:underline hover:font-bold">Cart</Link>
-    <Link href='/like' className="hover:underline hover:font-bold">Likes</Link>
-    <Link href='/admin' className="hover:underline hover:font-bold">Admin</Link>
-</div>
-<div className="flex gap-2 md:gap-4 justify-center w-full md:w-auto mt-2 md:mt-0">
-    {pathname !== '/login' && (
-        <Link href='/login'>
-            <button className="border border-black px-8 py-2 rounded-full text-xs font-bold uppercase">
-                Login
-            </button>
-        </Link>
-    )}
-{pathname !== '/signup' && (
-    <Link href='/signup'>
-        <button className="bg-black text-white px-8 py-2 rounded-full text-xs font-bold uppercase shadow-md">
-            SignUp
-        </button>
-    </Link>
-)}
-</div>
+"use client";
+import React, { useState } from 'react';
+import Link from 'next/link';
 
-</div>
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="bg-white text-black shadow-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+        <Link href="/" className="text-xl font-bold">SHOE STORE</Link>
+        <div className="hidden md:flex items-center space-x-6 font-medium">
+          <Link href="/">Home</Link>
+          <Link href="/like">Like</Link>
+          <Link href="/cart">Cart</Link>
+          <Link href="/admin">Admin</Link>
+          <Link href="/login" className="border border-black px-3 py-1 rounded">Login</Link>
+          <Link href="/signup" className="bg-black text-white px-3 py-1 rounded">Signup</Link>
         </div>
-    )
-}
+        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden font-bold">
+          {isOpen ? "CLOSE" : "MENU"}
+        </button>
+      </div>
+      {isOpen && (
+        <div className="md:hidden bg-white border-t p-4 flex flex-col space-y-4 font-medium">
+          <Link href="/" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link href="/like" onClick={() => setIsOpen(false)}>Like</Link>
+          <Link href="/cart" onClick={() => setIsOpen(false)}>Cart</Link>
+          <Link href="/admin" onClick={() => setIsOpen(false)}>Admin</Link>
+          <Link href="/login" onClick={() => setIsOpen(false)}>Login</Link>
+          <Link href="/signup" onClick={() => setIsOpen(false)}>Signup</Link>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
