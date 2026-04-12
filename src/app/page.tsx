@@ -57,7 +57,7 @@ export default function Home() {
                 </div>
                 <div className="flex gap-2 mt-6">
                   <Link href={`/product/${product.id}`} className='flex-1'>
-                  <button className="flex-1 bg-white text-black border border-black/10 py-3 rounded-2xl text-[10px] font-bold uppercase hover:bg-gray-100 transition-all">
+                  <button className="w-full bg-white text-black border border-black/10 py-3 rounded-2xl text-[10px] font-bold uppercase hover:bg-gray-100 transition-all">
                     Details
                   </button>
                   </Link>

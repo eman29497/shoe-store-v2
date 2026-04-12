@@ -29,14 +29,13 @@ export default function ProductDetails() {
             Experience the ultimate comfort and style with our premium footwear. 
             Designed for performance and crafted for the streets.
           </p>
-
-          <div className="flex gap-4">
+          <div className="grid grid-cols-2 gap-4 mt-6">
             <button 
               onClick={() => {
                 dispatch(addToCart(product));
                 alert("Added to Bag!");
               }}
-              className="flex-1 bg-black text-white py-5 rounded-2xl font-bold uppercase tracking-widest shadow-xl hover:bg-gray-800 transition-all"
+              className="w-full bg-black text-white py-4 rounded-full font-bold uppercase tracking-widest shadow-xl hover:bg-gray-800 transition-all"
             >
               Add to Cart
             </button>
