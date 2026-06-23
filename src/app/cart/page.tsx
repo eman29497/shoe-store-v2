@@ -3,10 +3,13 @@ import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../redux/store";
 import { removeFromCart, incrementQuantity, decrementQuantity } from "../redux/cartSlice";
+import CheckoutButton from "../components/CheckoutButton"; // Import yahan kiya
+
 export default function CartPage() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <main className="flex flex-col min-h-screen bg-white">
       <div className="flex-1 flex flex-col items-center px-4 py-16">
@@ -24,7 +27,7 @@ export default function CartPage() {
                   <div className="w-20 h-20 bg-white rounded-2xl p-2 shadow-sm">
                     <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
                   </div>
-         <div className="flex-1">
+                  <div className="flex-1">
                     <h3 className="font-bold text-black">{item.name}</h3>
                     <p className="text-gray-400 text-sm">${item.price}.00</p>
                     <div className="flex items-center gap-4 mt-3">
@@ -36,15 +39,20 @@ export default function CartPage() {
                       <button onClick={() => dispatch(removeFromCart(item.id))} className="text-red-500 text-xs font-bold uppercase">Remove</button>
                     </div>
                   </div>
-                  
                   <div className="font-black text-lg">${item.price * item.quantity}</div>
                 </div>
               ))}
               <div className="mt-10 pt-6 border-t border-gray-200">
-                <div className="flex justify-between text-xl font-black text-black">
+                <div className="flex justify-between text-xl font-black text-black mb-6">
                   <span>Total Amount</span>
                   <span>${totalPrice}.00</span>
                 </div>
+                
+                {/* Stripe Checkout Button yahan add kar diya */}
+                <div className="flex justify-center">
+                  <CheckoutButton cartItems={cartItems} />
+                </div>
+
               </div> 
             </>
           )}
